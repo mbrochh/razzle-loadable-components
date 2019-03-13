@@ -12,7 +12,7 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 let statsFile
 let extractor
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   console.log('reading statsfile for PROD');
   statsFile = path.resolve('./build/public/loadable-stats.json')
   extractor = new ChunkExtractor({ statsFile, entrypoints: ['client'] })
@@ -30,11 +30,11 @@ server
       </StaticRouter>
     )
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log('reading statsfile for DEV');
-      statsFile = path.resolve('./build/public/loadable-stats.json')
-      extractor = new ChunkExtractor({ statsFile, entrypoints: ['client'] })
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   console.log('reading statsfile for DEV');
+    //   statsFile = path.resolve('./build/public/loadable-stats.json')
+    //   extractor = new ChunkExtractor({ statsFile, entrypoints: ['client'] })
+    // }
     const jsx = extractor.collectChunks(app)
     const markup = renderToString(jsx)
     const scriptTags = extractor.getScriptTags()
